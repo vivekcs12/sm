@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smaya - A Vision in Red</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Heart container */
+    .heart-container {
+      margin-top: 30px;
+      width: 220px;
+      height: 220px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heart {
+      width: 120px;
+      height: 120px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -60px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 60px;
+    }
+
+    .heart-text {
+      position: absolute;
+      color: white;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes beat {
+      0%, 100% {
+        transform: rotate(-45deg) scale(1);
+      }
+      25% {
+        transform: rotate(-45deg) scale(1.1);
+      }
+      50% {
+        transform: rotate(-45deg) scale(1.2);
+      }
+      75% {
+        transform: rotate(-45deg) scale(1.1);
+      }
+    }
+
+    /* Content layout */
+    .split {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .left, .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      object-fit: cover;
+    }
+
+    .right {
+      color: #b30000;
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    /* Fade-in text */
+    .fade {
+      opacity: 0;
+      animation: fadeInText 1.5s ease-in-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.5s; }
+    .delay-2 { animation-delay: 1s; }
+    .delay-3 { animation-delay: 1.5s; }
+    .delay-4 { animation-delay: 2s; }
+    .delay-5 { animation-delay: 2.5s; }
+    .delay-6 { animation-delay: 3s; }
+    .delay-7 { animation-delay: 3.5s; }
+    .delay-8 { animation-delay: 4s; }
+    .delay-9 { animation-delay: 4.5s; }
+    .delay-10 { animation-delay: 5s; }
+
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Red flower background */
+    .flower {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+      filter: blur(0.5px);
+      animation: floatFlower 3.5s linear infinite;
+      left: 0;
+      bottom: -70px;
+      top: auto !important;
+    }
+
+    @keyframes floatFlower {
+      0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.18; }
+      10% { opacity: 0.25; }
+      90% { opacity: 0.22; }
+      100% { transform: translateY(-90vh) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body onclick="playMusic()">
+  <!-- Red flower background -->
+  <div id="flower-bg"></div>
+  <!-- Animated heart with horizontal "Bestie" -->
+  <div class="heart-container">
+    <div class="heart"></div>
+    <div class="heart-text">Bestie</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="split">
+    <div class="left">
+      <img src="image.png" alt="Smaya" class="image" />
+    </div>
+    <div class="right">
+      <p class="fade delay-1">Smaya, you are a vision in red.</p>
+      <p class="fade delay-2">Your hair flows like silk, kissed by the sun’s gentle gold.</p>
+      <p class="fade delay-3">Your hazel eyes sparkle with playful secrets.</p>
+      <p class="fade delay-4">Your laughter is a melody that brightens every room.</p>
+      <p class="fade delay-5">Your smile, soft and rosy, is pure joy.</p>
+      <p class="fade delay-6"><strong></strong></p>
+      <p class="fade delay-7">– You set my heart ablaze, Smaya, like this canvas of red.</p>
+      <p class="fade delay-8">– Your smile outshines a thousand roses.</p>
+      <p class="fade delay-9">– Even roses envy your glow, Smaya.</p>
+      <p class="fade delay-10">– You make my cheeks blush deeper than this heart.</p>
+    </div>
+  </div>
+
+  <!-- Optional background music -->
+  <audio id="bgm" src="music.mp3" preload="auto"></audio>
+
+  <script>
+    // Add floating red flowers to the background
+    document.addEventListener('DOMContentLoaded', function() {
+      const flowerBg = document.getElementById('flower-bg');
+      const flowerEmoji = '🌺';
+      const flowerCount = 28; // doubled for more flowers
+      for (let i = 0; i < flowerCount; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.fontSize = (40 + Math.random() * 30) + 'px';
+        flower.style.animationDelay = (Math.random() * 18) + 's';
+        flower.textContent = flowerEmoji;
+        flowerBg.appendChild(flower);
+      }
+    });
+
+    function playMusic() {
+      const audio = document.getElementById("bgm");
+      if (audio.paused) {
+        audio.volume = 1.0;
+        audio.play();
+      }
+    }
+  </script>
+
+</body>
+</html>
